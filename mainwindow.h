@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <coreengine.h>
 
 class MainWindow : public QGraphicsScene
 {
@@ -10,6 +11,20 @@ class MainWindow : public QGraphicsScene
 
 public:
     MainWindow(QSize size, QObject *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+
+private:
+    void scenePress(int id, const QPointF &p);
+    void sceneMove(int id, const QPointF &lp, const QPointF &cp);
+    void sceneRelease(int id, const QPointF &p);
+
+private:
+   CoreEngine * coreEngine;
+
 };
 #endif // MAINWINDOW_H

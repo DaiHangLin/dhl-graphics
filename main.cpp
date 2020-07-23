@@ -11,6 +11,8 @@ int main(int argc, char *argv[])
     QSize desktopSize = qApp->desktop()->screenGeometry().size();
     QScopedPointer<QGraphicsView> view(new QGraphicsView());
     QScopedPointer<MainWindow> scene(new MainWindow(desktopSize));
+    view->setRenderHint(QPainter::Antialiasing);
+    view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     view->setScene(scene.get());
     view->resize(desktopSize);
     view->show();
