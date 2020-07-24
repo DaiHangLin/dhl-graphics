@@ -1,8 +1,12 @@
 #ifndef COREENGINE_H
 #define COREENGINE_H
 
+#include "pensepc.h"
+#include "tempcanvas.h"
+
 #include <QObject>
 #include <QGraphicsObject>
+#include <pointdata.h>
 
 class CoreEngine : public QGraphicsObject
 {
@@ -16,6 +20,12 @@ public:
 
 private:
     QSizeF size;
+    PenSpec penSpc;
+    QSharedPointer<TempCanvas> tempCanvas;
+    QHash<int, PointData> pointDataMap;
+
+private:
+    void addPointData(int id, const QPointF &p);
 
 protected:
     QRectF boundingRect() const;
@@ -24,6 +34,7 @@ protected:
 signals:
 
 public slots:
+    void updateSelf();
 };
 
 #endif // COREENGINE_H

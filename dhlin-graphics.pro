@@ -18,11 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     coreengine.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pensepc.cpp \
+    pointdata.cpp \
+    tempcanvas.cpp
 
 HEADERS += \
     coreengine.h \
-    mainwindow.h
+    mainwindow.h \
+    pensepc.h \
+    pointdata.h \
+    tempcanvas.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

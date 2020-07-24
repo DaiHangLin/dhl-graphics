@@ -5,25 +5,46 @@
 
 CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
     QGraphicsObject(parent),
-    size(s)
+    size(s),
+    penSpc(PenSpec()),
+    pointDataMap(QHash<int, PointData>())
 {
-
+    tempCanvas = QSharedPointer<TempCanvas>(new TempCanvas(size, penSpc, this));
+    tempCanvas->setZValue(10);
 }
 
 void CoreEngine::drawPress(int id, const QPointF &p)
 {
     qDebug() << __FUNCTION__ << id << p;
-    QGraphicsItem *item = new QGraphicsItem(this);
+    pointDataMap.remove(id);
+    PointData &pd = pointDataMap[id];
+    pd.id = id;
+    pd.sp = p;
+    pd.addPoint(p);
 }
 
 void CoreEngine::drawMove(int id, const QPointF &lp, const QPointF &cp)
 {
     qDebug() << __FUNCTION__ << id << lp << cp;
+    if (!pointDataMap.contains(id)) {
+        return;
+    }
+    addPointData(id, cp);
 }
 
 void CoreEngine::drawRelease(int id, const QPointF &p)
 {
     qDebug() << __FUNCTION__ << id << p;
+    if (!pointDataMap.contains(id)) {
+        return;
+    }
+    addPointData(id, p);
+}
+
+void CoreEngine::addPointData(int id, const QPointF &p)
+{
+    PointData &pd = pointDataMap[id];
+    pd.addPoint(p);
 }
 
 QRectF CoreEngine::boundingRect() const
@@ -34,6 +55,14 @@ QRectF CoreEngine::boundingRect() const
 void CoreEngine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setPen(Qt::NoPen);
-    painter->setBrush(Qt::red);
+    painter->setBrush(Qt::white);
     painter->drawRect(this->boundingRect());
+}
+
+void CoreEngine::updateSelf()
+{
+    foreach (int id, pointDataMap.keys()) {
+        PointData &pd = pointDataMap[id];
+        tempCanvas->drawItem(pd);
+    }
 }

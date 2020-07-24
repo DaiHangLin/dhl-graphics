@@ -3,21 +3,20 @@
 
 MainWindow::MainWindow(QSize size, QObject *parent)
     : QGraphicsScene(QRectF(QPoint(0, 0), size), parent),
-      coreEngine(nullptr)
+      coreEngine(QSharedPointer<CoreEngine>(new CoreEngine(size))),
+      timer(QSharedPointer<QTimer>(new QTimer))
 {
-    coreEngine = new CoreEngine(size);
+    addItem(coreEngine.data());
+    connect(timer.data(), &QTimer::timeout, coreEngine.data(), &CoreEngine::updateSelf);
 }
 
 MainWindow::~MainWindow()
 {
-    if (coreEngine) {
-        delete coreEngine;
-        coreEngine = nullptr;
-    }
 }
 
 void MainWindow::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    timer->start(1000 / 60);
     scenePress(1, event->scenePos());
     QGraphicsScene::mousePressEvent(event);
 }
@@ -32,6 +31,7 @@ void MainWindow::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     sceneRelease(1, event->scenePos());
     QGraphicsScene::mousePressEvent(event);
+    timer->stop();
 }
 
 void MainWindow::scenePress(int id, const QPointF &p)

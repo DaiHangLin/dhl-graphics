@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <coreengine.h>
+#include <QTimer>
 
 class MainWindow : public QGraphicsScene
 {
@@ -24,7 +25,7 @@ private:
     void sceneRelease(int id, const QPointF &p);
 
 private:
-   CoreEngine * coreEngine;
-
+    QSharedPointer<CoreEngine> coreEngine;
+    QSharedPointer<QTimer> timer;
 };
 #endif // MAINWINDOW_H
