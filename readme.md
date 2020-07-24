@@ -15,3 +15,9 @@
   这个类主要用来处理 event 事件
 # 临时画板
   先将绘画内容，绘制再临时的画板中，
+
+07-24
+# drawLine
+  QgraphiceObject或者Item都需要添加到scene中才能正常显示
+  通过addItem添加到scene中
+  之后在engine中添加的item，他们的parent都是engine，通过对象树的关系，也就能正常在scene中显示
