@@ -10,14 +10,17 @@
 	- 支持笔锋
 
 ## 进展
-07-23
 # coreEngine
   这个类主要用来处理 event 事件
 # 临时画板
   先将绘画内容，绘制再临时的画板中，
 
-07-24
 # drawLine
   QgraphiceObject或者Item都需要添加到scene中才能正常显示
   通过addItem添加到scene中
   之后在engine中添加的item，他们的parent都是engine，通过对象树的关系，也就能正常在scene中显示
+
+# qt布局
+  qt中设置parent的布局方式，比如水平布局，垂直布局，可以使内容为自适应布局，根据parent大小改变
+  添加几个切换形状的按钮
+  

@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <coreengine.h>
 #include <QTimer>
+#include <QDebug>
 
 class MainWindow : public QGraphicsScene
 {
@@ -27,5 +28,8 @@ private:
 private:
     QSharedPointer<CoreEngine> coreEngine;
     QSharedPointer<QTimer> timer;
+
+public slots:
+    void handleDrawTypeChanged(DrawType &dt);
 };
 #endif // MAINWINDOW_H

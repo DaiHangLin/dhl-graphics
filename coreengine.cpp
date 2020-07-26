@@ -7,6 +7,7 @@ CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
     QGraphicsObject(parent),
     size(s),
     penSpc(PenSpec()),
+    dt(Draw_Line),
     pointDataMap(QHash<int, PointData>())
 {
     tempCanvas = QSharedPointer<TempCanvas>(new TempCanvas(size, penSpc, this));
@@ -20,6 +21,7 @@ void CoreEngine::drawPress(int id, const QPointF &p)
     PointData &pd = pointDataMap[id];
     pd.id = id;
     pd.sp = p;
+    pd.drawType = dt;
     pd.addPoint(p);
 }
 
@@ -65,4 +67,8 @@ void CoreEngine::updateSelf()
         PointData &pd = pointDataMap[id];
         tempCanvas->drawItem(pd);
     }
+}
+
+void CoreEngine::setDrawType(DrawType &t) {
+    dt = t;
 }

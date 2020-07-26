@@ -17,10 +17,12 @@ public:
     void drawPress(int id, const QPointF &p);
     void drawMove(int id, const QPointF &lp, const QPointF &cp);
     void drawRelease(int id, const QPointF &p);
+    void setDrawType(DrawType &dt);
 
 private:
     QSizeF size;
     PenSpec penSpc;
+    DrawType dt;
     QSharedPointer<TempCanvas> tempCanvas;
     QHash<int, PointData> pointDataMap;
 

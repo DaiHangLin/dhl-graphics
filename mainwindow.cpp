@@ -49,3 +49,7 @@ void MainWindow::sceneRelease(int id, const QPointF &p)
     coreEngine->drawRelease(id, p);
 }
 
+void MainWindow::handleDrawTypeChanged(DrawType &dt) {
+    coreEngine->setDrawType(dt);
+}
+

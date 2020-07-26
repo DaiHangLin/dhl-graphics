@@ -21,16 +21,21 @@ SOURCES += \
     mainwindow.cpp \
     pensepc.cpp \
     pointdata.cpp \
-    tempcanvas.cpp
+    tempcanvas.cpp \
+    toolwindow.cpp
 
 HEADERS += \
     coreengine.h \
     mainwindow.h \
     pensepc.h \
     pointdata.h \
-    tempcanvas.h
+    tempcanvas.h \
+    toolwindow.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    toolwindow.ui
