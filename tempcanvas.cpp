@@ -9,7 +9,7 @@ TempCanvas::TempCanvas(const QSizeF &size, PenSpec &ps, QGraphicsObject *parent)
     pixmap = QSharedPointer<QPixmap>(new QPixmap(size.toSize()));
     pixmap->fill(Qt::transparent);
     painter = QSharedPointer<QPainter>(new QPainter(pixmap.get()));
-    painter->setPen(QPen(penSpec.color, penSpec.width));
+    painter->setPen(QPen(penSpec.color, penSpec.width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->setRenderHints(QPainter::HighQualityAntialiasing);
 }
 
@@ -26,14 +26,13 @@ void TempCanvas::drawRectange(PointData &pd)
 void TempCanvas::drawCircle(PointData &pd)
 {
     QLineF line(pd.sp, pd.cp);
-    painter->drawEllipse(pd.sp, line.length(), line.length());
+    painter->drawEllipse((pd.sp + pd.cp) / 2, line.length() / 2, line.length() / 2);
 }
 
 void TempCanvas::drawItem(PointData &pd)
 {
     pixmap->fill(Qt::transparent);
     DrawType &type = pd.drawType;
-    qDebug() << "draw item";
     switch (type) {
     case Draw_Line:
         drawLine(pd);
@@ -69,6 +68,5 @@ QRectF TempCanvas::boundingRect() const
 
 void TempCanvas::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    qDebug() << "======================= temp canvas paint" << *pixmap.data();
     painter->drawPixmap(0, 0, *pixmap.data());
 }

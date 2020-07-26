@@ -17,6 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     coreengine.cpp \
+    customlineitem.cpp \
+    graphicsbaseobject.cpp \
+    graphicsshapefactory.cpp \
     main.cpp \
     mainwindow.cpp \
     pensepc.cpp \
@@ -26,6 +29,9 @@ SOURCES += \
 
 HEADERS += \
     coreengine.h \
+    customlineitem.h \
+    graphicsbaseobject.h \
+    graphicsshapefactory.h \
     mainwindow.h \
     pensepc.h \
     pointdata.h \

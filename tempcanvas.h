@@ -17,6 +17,7 @@ public:
 
     void drawItem(PointData &pd);
     void save();
+    void clean();
 
 protected:
     QRectF boundingRect() const override;
@@ -32,7 +33,6 @@ private:
     void drawLine(PointData &pd);
     void drawRectange(PointData &pd);
     void drawCircle(PointData &pd);
-    void clean();
 
 };
 

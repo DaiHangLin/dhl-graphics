@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QGraphicsObject>
 #include <pointdata.h>
+#include <graphicsbaseobject.h>
+#include <graphicsshapefactory.h>
 
 class CoreEngine : public QGraphicsObject
 {
@@ -25,9 +27,11 @@ private:
     DrawType dt;
     QSharedPointer<TempCanvas> tempCanvas;
     QHash<int, PointData> pointDataMap;
+    GraphicsShapeFactory factory;
 
 private:
     void addPointData(int id, const QPointF &p);
+    void drawRealItem(int id);
 
 protected:
     QRectF boundingRect() const;
