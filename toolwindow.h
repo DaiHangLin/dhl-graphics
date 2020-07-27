@@ -25,6 +25,8 @@ private slots:
 
     void on_rb_free_toggled(bool checked);
 
+    void on_rb_select_toggled(bool checked);
+
 private:
     Ui::ToolWindow *ui;
 

@@ -21,6 +21,9 @@ protected:
     PenSpec penSpec;
     PointData pointData;
 
+protected:
+    void getRealRect(QRectF *rectf) const;
+
 private:
     virtual QRectF getBoundingRect() const = 0;
 

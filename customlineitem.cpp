@@ -10,12 +10,19 @@ CustomLineItem::CustomLineItem(PointData &pd, QGraphicsObject *parent) : Graphic
 
 QRectF CustomLineItem::getBoundingRect() const
 {
-  return QRectF(pointData.sp, pointData.cp);
+    QRectF rectf;
+    getRealRect(&rectf);
+    return rectf;
 }
 
 void CustomLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setPen(QPen(penSpec.color, penSpec.width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(pointData.sp, pointData.cp);
-    qDebug() << "line item paint";
+    painter->setPen(QPen(Qt::red, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->drawPoint(pointData.sp);
+    painter->drawPoint(pointData.cp);
+    QRectF rectf;
+    getRealRect(&rectf);
+    painter->drawRect(rectf);
 }

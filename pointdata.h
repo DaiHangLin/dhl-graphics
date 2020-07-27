@@ -8,6 +8,7 @@ enum DrawType {
     Draw_Rectange,
     Draw_Circle,
     Draw_Free,
+    Draw_None,
 };
 
 class PointData

@@ -16,7 +16,10 @@ CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
 
 void CoreEngine::drawPress(int id, const QPointF &p)
 {
-    pointDataMap.remove(id);
+    if (dt == Draw_None) {
+
+        return;
+    }
     PointData &pd = pointDataMap[id];
     pd.id = id;
     pd.sp = p;
@@ -40,6 +43,7 @@ void CoreEngine::drawRelease(int id, const QPointF &p)
     addPointData(id, p);
     drawRealItem(id);
     tempCanvas->clean();
+    pointDataMap.remove(id);
 }
 
 void CoreEngine::addPointData(int id, const QPointF &p)
@@ -52,8 +56,10 @@ void CoreEngine::drawRealItem(int id)
 {
     PointData &pd = pointDataMap[id];
     GraphicsBaseObject *obj = factory.drawItem(pd, this);
-    obj->setPenSpec(penSpc);
-    obj->drawItem();
+    if (obj) {
+        obj->setPenSpec(penSpc);
+        obj->drawItem();
+    }
 }
 
 QRectF CoreEngine::boundingRect() const

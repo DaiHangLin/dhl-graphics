@@ -46,3 +46,11 @@ void ToolWindow::on_rb_free_toggled(bool checked)
         emit onDrawTypeSelected(t);
     }
 }
+
+void ToolWindow::on_rb_select_toggled(bool checked)
+{
+    if (checked) {
+        DrawType t(Draw_None);
+        emit onDrawTypeSelected(t);
+    }
+}
