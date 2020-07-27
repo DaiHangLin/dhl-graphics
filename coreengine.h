@@ -20,6 +20,7 @@ public:
     void drawMove(int id, const QPointF &lp, const QPointF &cp);
     void drawRelease(int id, const QPointF &p);
     void setDrawType(DrawType &dt);
+    QString getType();
 
 private:
     QSizeF size;
@@ -32,6 +33,7 @@ private:
 private:
     void addPointData(int id, const QPointF &p);
     void drawRealItem(int id);
+    void checkSelectedItem(QPointF &p);
 
 protected:
     QRectF boundingRect() const;

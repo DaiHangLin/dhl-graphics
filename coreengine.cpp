@@ -17,7 +17,8 @@ CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
 void CoreEngine::drawPress(int id, const QPointF &p)
 {
     if (dt == Draw_None) {
-
+        QPointF pf = p;
+        checkSelectedItem(pf);
         return;
     }
     PointData &pd = pointDataMap[id];
@@ -62,6 +63,19 @@ void CoreEngine::drawRealItem(int id)
     }
 }
 
+void CoreEngine::checkSelectedItem(QPointF &p)
+{
+    QList<QGraphicsItem *> items = childItems();
+    foreach(QGraphicsItem *item, items) {
+        GraphicsBaseObject *obj = dynamic_cast<GraphicsBaseObject *>(item);
+        if (obj) {
+            bool contains = item->contains(p);
+            qDebug() << "obj" << obj << contains;
+            item->setSelected(contains);
+        }
+   }
+}
+
 QRectF CoreEngine::boundingRect() const
 {
    return QRectF(QPoint(0, 0), size);
@@ -84,4 +98,9 @@ void CoreEngine::updateSelf()
 
 void CoreEngine::setDrawType(DrawType &t) {
     dt = t;
+}
+
+QString CoreEngine::getType()
+{
+   return "Engine";
 }

@@ -9,6 +9,7 @@ class CustomLineItem : public GraphicsBaseObject
     Q_OBJECT
 public:
     explicit CustomLineItem(PointData &pd, QGraphicsObject *parent = nullptr);
+    bool isSelected(QPointF &p) override;
 
 protected:
     QRectF getBoundingRect() const override;

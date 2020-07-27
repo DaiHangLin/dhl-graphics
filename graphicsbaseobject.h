@@ -15,13 +15,15 @@ public:
     void setPointData(PointData &pd);
     void setPenSpec(PenSpec &ps);
     void drawItem();
+    virtual bool isSelected(QPointF &p) = 0;
+    virtual QString getType();
 
 protected:
-    QRectF boundingRect() const override;
     PenSpec penSpec;
     PointData pointData;
 
 protected:
+    QRectF boundingRect() const override;
     void getRealRect(QRectF *rectf) const;
 
 private:

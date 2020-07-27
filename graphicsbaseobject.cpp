@@ -20,7 +20,20 @@ void GraphicsBaseObject::setPenSpec(PenSpec &ps)
 
 void GraphicsBaseObject::drawItem()
 {
-   update();
+    update();
+}
+
+QString GraphicsBaseObject::getType()
+{
+   return "graphics_item";
+}
+
+bool GraphicsBaseObject::isSelected(QPointF &p)
+{
+    QRectF rectf;
+    getRealRect(&rectf);
+    QRectF clickRect(QRectF(p, QSizeF(1, 1)));
+    return rectf.intersects(clickRect);
 }
 
 QRectF GraphicsBaseObject::boundingRect() const

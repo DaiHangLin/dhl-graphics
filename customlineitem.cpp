@@ -5,7 +5,7 @@
 CustomLineItem::CustomLineItem(PointData &pd, QGraphicsObject *parent) : GraphicsBaseObject(parent)
 {
     pointData = pd;
-    qDebug() << "point data" << pointData.sp;
+    setSelected(true);
 }
 
 QRectF CustomLineItem::getBoundingRect() const
@@ -13,6 +13,7 @@ QRectF CustomLineItem::getBoundingRect() const
     QRectF rectf;
     getRealRect(&rectf);
     return rectf;
+//    return QRectF(0, 0, qAbs(pointData.sp.x() - pointData.cp.x()), qAbs(pointData.sp.y() - pointData.cp.y()));
 }
 
 void CustomLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -25,4 +26,12 @@ void CustomLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     QRectF rectf;
     getRealRect(&rectf);
     painter->drawRect(rectf);
+}
+
+bool CustomLineItem::isSelected(QPointF &p)
+{
+    QRectF rectf;
+    getRealRect(&rectf);
+    QRectF clickRect(QRectF(p, QSizeF(1, 1)));
+    return rectf.intersects(clickRect);
 }
