@@ -28,5 +28,9 @@
   将临时图片清空
   在coreEngine的基础上，继续添加GraphicsItem，并且设置parent为coreEngine，
   注意这里需要生成指针，否则在生命周期结束后，会被析构
-  
+
+
+# 自闭了
+  1. 为什么添加了ItemIsMoveable后无法移动
+  2. 为了再CustomLine中添加mouseEvent后，每次都只有添加的第一个元素在获取事件  
  

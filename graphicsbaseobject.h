@@ -6,6 +6,7 @@
 
 #include <QObject>
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
 
 class GraphicsBaseObject : public QGraphicsObject
 {
@@ -14,8 +15,7 @@ public:
     explicit GraphicsBaseObject(QGraphicsItem *parent = nullptr);
     void setPointData(PointData &pd);
     void setPenSpec(PenSpec &ps);
-    void drawItem();
-    virtual bool isSelected(QPointF &p) = 0;
+    bool cusSelected;
     virtual QString getType();
 
 protected:
@@ -27,7 +27,7 @@ protected:
     void getRealRect(QRectF *rectf) const;
 
 private:
-    virtual QRectF getBoundingRect() const = 0;
+//    virtual QRectF getBoundingRect() const = 0;
 
 signals:
 

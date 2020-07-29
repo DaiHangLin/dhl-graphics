@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QGraphicsSceneMouseEvent>
+#include <QPixmapCache>
 
 MainWindow::MainWindow(QSize size, QObject *parent)
     : QGraphicsScene(QRectF(QPoint(0, 0), size), parent),
@@ -8,7 +9,8 @@ MainWindow::MainWindow(QSize size, QObject *parent)
 {
     addItem(coreEngine.data());
     connect(timer.data(), &QTimer::timeout, coreEngine.data(), &CoreEngine::updateSelf);
-}
+    QPixmapCache::setCacheLimit(204800);
+  }
 
 MainWindow::~MainWindow()
 {

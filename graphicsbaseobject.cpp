@@ -1,11 +1,14 @@
 #include "graphicsbaseobject.h"
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QDebug>
 
 GraphicsBaseObject::GraphicsBaseObject(QGraphicsItem *parent) : QGraphicsObject(parent)
+  , cusSelected(false)
 {
-    setFlag(ItemIsSelectable,true);
+//    setFlag(ItemIsSelectable,true);
     setFlag(ItemIsMovable,true);
+    setSelected(true);
 }
 
 void GraphicsBaseObject::setPointData(PointData &pd)
@@ -18,27 +21,16 @@ void GraphicsBaseObject::setPenSpec(PenSpec &ps)
     penSpec = ps;
 }
 
-void GraphicsBaseObject::drawItem()
-{
-    update();
-}
-
 QString GraphicsBaseObject::getType()
 {
    return "graphics_item";
 }
 
-bool GraphicsBaseObject::isSelected(QPointF &p)
+QRectF GraphicsBaseObject::boundingRect() const
 {
     QRectF rectf;
     getRealRect(&rectf);
-    QRectF clickRect(QRectF(p, QSizeF(1, 1)));
-    return rectf.intersects(clickRect);
-}
-
-QRectF GraphicsBaseObject::boundingRect() const
-{
-    return getBoundingRect();
+    return rectf;
 }
 
 void GraphicsBaseObject::getRealRect(QRectF *rectf) const
@@ -52,3 +44,5 @@ void GraphicsBaseObject::getRealRect(QRectF *rectf) const
     qreal aw = penSpec.width / 2;
     rectf->adjust(-aw, aw, aw, -aw);
 }
+
+

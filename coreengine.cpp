@@ -10,6 +10,7 @@ CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
     dt(Draw_Line),
     pointDataMap(QHash<int, PointData>())
 {
+    setCacheMode(ItemCoordinateCache);
     tempCanvas = QSharedPointer<TempCanvas>(new TempCanvas(size, penSpc, this));
     tempCanvas->setZValue(10);
 }
@@ -17,10 +18,11 @@ CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
 void CoreEngine::drawPress(int id, const QPointF &p)
 {
     if (dt == Draw_None) {
-        QPointF pf = p;
-        checkSelectedItem(pf);
+//        QPointF pf = p;
+//        checkSelectedItem(pf);
         return;
     }
+    qDebug() << "draw press";
     PointData &pd = pointDataMap[id];
     pd.id = id;
     pd.sp = p;
@@ -56,11 +58,14 @@ void CoreEngine::addPointData(int id, const QPointF &p)
 void CoreEngine::drawRealItem(int id)
 {
     PointData &pd = pointDataMap[id];
-    GraphicsBaseObject *obj = factory.drawItem(pd, this);
-    if (obj) {
-        obj->setPenSpec(penSpc);
-        obj->drawItem();
-    }
+//    GraphicsBaseObject *obj = factory.drawItem(pd, this);
+//    if (obj) {
+//        qDebug() << "draw real item" << obj;
+//        obj->setPenSpec(penSpc);
+//    }
+     CustomLineItem *lineItem = new CustomLineItem(pd, this);
+     qDebug() << "line item" << lineItem;
+     lineItem->setPenSpec(penSpc);
 }
 
 void CoreEngine::checkSelectedItem(QPointF &p)
@@ -69,11 +74,13 @@ void CoreEngine::checkSelectedItem(QPointF &p)
     foreach(QGraphicsItem *item, items) {
         GraphicsBaseObject *obj = dynamic_cast<GraphicsBaseObject *>(item);
         if (obj) {
-            bool contains = item->contains(p);
-            qDebug() << "obj" << obj << contains;
-            item->setSelected(contains);
+            QPointF mp = mapToItem(item, p);
+            bool contains = item->contains(mp);
+            obj->cusSelected = contains;
+            qDebug() << "obj" << obj << obj->cusSelected;
         }
-   }
+    }
+    update();
 }
 
 QRectF CoreEngine::boundingRect() const
@@ -81,7 +88,7 @@ QRectF CoreEngine::boundingRect() const
    return QRectF(QPoint(0, 0), size);
 }
 
-void CoreEngine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void CoreEngine::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->setPen(Qt::NoPen);
     painter->setBrush(Qt::white);
@@ -94,6 +101,7 @@ void CoreEngine::updateSelf()
         PointData &pd = pointDataMap[id];
         tempCanvas->drawItem(pd);
     }
+    update();
 }
 
 void CoreEngine::setDrawType(DrawType &t) {

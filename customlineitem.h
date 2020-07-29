@@ -9,11 +9,12 @@ class CustomLineItem : public GraphicsBaseObject
     Q_OBJECT
 public:
     explicit CustomLineItem(PointData &pd, QGraphicsObject *parent = nullptr);
-    bool isSelected(QPointF &p) override;
 
 protected:
-    QRectF getBoundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 signals:
 
