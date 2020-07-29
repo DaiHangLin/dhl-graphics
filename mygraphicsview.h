@@ -17,9 +17,6 @@ private:
     ToolWindow *toolView;
     MainWindow *scene;
 
-protected:
-    void resizeEvent(QResizeEvent *event) override;
-
 signals:
 
 public slots:
