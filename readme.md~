@@ -33,4 +33,7 @@
 # 自闭了
   1. 为什么添加了ItemIsMoveable后无法移动
   2. 为了再CustomLine中添加mouseEvent后，每次都只有添加的第一个元素在获取事件  
- 
+
+# 不能拖拽的原因
+  1. 事件冒泡类型不匹配，move和release的事件都是press 
+
