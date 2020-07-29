@@ -6,6 +6,7 @@
 #include <coreengine.h>
 #include <QTimer>
 #include <QDebug>
+#include <qgraphicssceneevent.h>
 
 class MainWindow : public QGraphicsScene
 {

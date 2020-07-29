@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <QGraphicsSceneMouseEvent>
 #include <QPixmapCache>
 
 MainWindow::MainWindow(QSize size, QObject *parent)
@@ -26,13 +25,13 @@ void MainWindow::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void MainWindow::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     sceneMove(1, event->lastScenePos(), event->scenePos());
-    QGraphicsScene::mousePressEvent(event);
+    QGraphicsScene::mouseMoveEvent(event);
 }
 
 void MainWindow::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     sceneRelease(1, event->scenePos());
-    QGraphicsScene::mousePressEvent(event);
+    QGraphicsScene::mouseReleaseEvent(event);
     timer->stop();
 }
 

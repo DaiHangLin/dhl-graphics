@@ -6,7 +6,7 @@
 GraphicsBaseObject::GraphicsBaseObject(QGraphicsItem *parent) : QGraphicsObject(parent)
   , cusSelected(false)
 {
-//    setFlag(ItemIsSelectable,true);
+    setFlag(ItemIsSelectable,true);
     setFlag(ItemIsMovable,true);
     setSelected(true);
 }

@@ -11,9 +11,9 @@ int main(int argc, char *argv[])
 
     QSize desktopSize = qApp->desktop()->screenGeometry().size();
 
-    QScopedPointer<ToolWindow> toolView(new ToolWindow());
-    toolView->move(desktopSize.width() - 200, 100);
-    toolView->show();
+    ToolWindow toolView;
+    toolView.move(desktopSize.width() - 200, 100);
+    toolView.show();
 
     QScopedPointer<QGraphicsView> view(new QGraphicsView());
     QScopedPointer<MainWindow> scene(new MainWindow(desktopSize));
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     view->resize(desktopSize);
     view->show();
 
-    QObject::connect(toolView.get(), &ToolWindow::onDrawTypeSelected, scene.get(), &MainWindow::handleDrawTypeChanged);
+    QObject::connect(&toolView, &ToolWindow::onDrawTypeSelected, scene.get(), &MainWindow::handleDrawTypeChanged);
 
     return a.exec();
 }
