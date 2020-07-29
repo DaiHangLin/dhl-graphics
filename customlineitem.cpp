@@ -28,27 +28,14 @@ void CustomLineItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 void CustomLineItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mousePressEvent(event);
-    if (!cusSelected) {
-        return;
-    }
 }
 
 void CustomLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mouseMoveEvent(event);
-    qDebug() << "this" << this << "mouse move" << cusSelected;
-    if (!cusSelected) {
-        return;
-    }
-    QPointF scenePos = event->scenePos();
-    QPointF lastScenePos = event->lastScenePos();
-    setPos(pos() + scenePos - lastScenePos);
 }
 
 void CustomLineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mouseReleaseEvent(event);
-    if (!cusSelected) {
-        return;
-    }
 }

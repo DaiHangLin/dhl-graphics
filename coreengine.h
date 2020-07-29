@@ -33,7 +33,7 @@ private:
 private:
     void addPointData(int id, const QPointF &p);
     void drawRealItem(int id);
-    void checkSelectedItem(QPointF &p);
+    bool checkHasItemSelected(const QPointF &p);
 
 protected:
     QRectF boundingRect() const;

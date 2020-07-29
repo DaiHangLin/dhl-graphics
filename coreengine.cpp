@@ -18,11 +18,11 @@ CoreEngine::CoreEngine(const QSizeF &s, QGraphicsObject *parent) :
 void CoreEngine::drawPress(int id, const QPointF &p)
 {
     if (dt == Draw_None) {
-//        QPointF pf = p;
-//        checkSelectedItem(pf);
         return;
     }
-    qDebug() << "draw press";
+    if (checkHasItemSelected(p)) {
+        return;
+    }
     PointData &pd = pointDataMap[id];
     pd.id = id;
     pd.sp = p;
@@ -58,29 +58,22 @@ void CoreEngine::addPointData(int id, const QPointF &p)
 void CoreEngine::drawRealItem(int id)
 {
     PointData &pd = pointDataMap[id];
-//    GraphicsBaseObject *obj = factory.drawItem(pd, this);
-//    if (obj) {
-//        qDebug() << "draw real item" << obj;
-//        obj->setPenSpec(penSpc);
-//    }
-     CustomLineItem *lineItem = new CustomLineItem(pd, this);
-     qDebug() << "line item" << lineItem;
-     lineItem->setPenSpec(penSpc);
+    GraphicsBaseObject *obj = factory.drawItem(pd, this);
+    if (obj) {
+        obj->setPenSpec(penSpc);
+    }
 }
 
-void CoreEngine::checkSelectedItem(QPointF &p)
+bool CoreEngine::checkHasItemSelected(const QPointF &p)
 {
     QList<QGraphicsItem *> items = childItems();
     foreach(QGraphicsItem *item, items) {
         GraphicsBaseObject *obj = dynamic_cast<GraphicsBaseObject *>(item);
-        if (obj) {
-            QPointF mp = mapToItem(item, p);
-            bool contains = item->contains(mp);
-            obj->cusSelected = contains;
-            qDebug() << "obj" << obj << obj->cusSelected;
+        if (obj && obj->isSelected()) {
+            return true;
         }
     }
-    update();
+    return false;
 }
 
 QRectF CoreEngine::boundingRect() const

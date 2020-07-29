@@ -15,7 +15,6 @@ public:
     explicit GraphicsBaseObject(QGraphicsItem *parent = nullptr);
     void setPointData(PointData &pd);
     void setPenSpec(PenSpec &ps);
-    bool cusSelected;
     virtual QString getType();
 
 protected:

@@ -20,6 +20,5 @@ GraphicsBaseObject * GraphicsShapeFactory::drawItem(PointData &pd, QGraphicsObje
 GraphicsBaseObject *GraphicsShapeFactory::drawLine(PointData &pd, QGraphicsObject &parent)
 {
     CustomLineItem *lineItem = new CustomLineItem(pd, &parent);
-    qDebug() << "line item" << lineItem;
     return lineItem;
 }
