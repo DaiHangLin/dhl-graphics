@@ -22,6 +22,7 @@ SOURCES += \
     graphicsshapefactory.cpp \
     main.cpp \
     mainwindow.cpp \
+    mygraphicsview.cpp \
     pensepc.cpp \
     pointdata.cpp \
     tempcanvas.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     graphicsbaseobject.h \
     graphicsshapefactory.h \
     mainwindow.h \
+    mygraphicsview.h \
     pensepc.h \
     pointdata.h \
     tempcanvas.h \

@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGraphicsView>
+#include <mygraphicsview.h>
 
 int main(int argc, char *argv[])
 {
@@ -11,19 +12,12 @@ int main(int argc, char *argv[])
 
     QSize desktopSize = qApp->desktop()->screenGeometry().size();
 
-    ToolWindow toolView;
-    toolView.move(desktopSize.width() - 200, 100);
-    toolView.show();
-
-    QScopedPointer<QGraphicsView> view(new QGraphicsView());
     QScopedPointer<MainWindow> scene(new MainWindow(desktopSize));
-    view->setRenderHint(QPainter::Antialiasing);
-    view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    view->setScene(scene.get());
+
+    QScopedPointer<MyGraphicsView> view(new MyGraphicsView(scene.get()));
+
     view->resize(desktopSize);
     view->show();
-
-    QObject::connect(&toolView, &ToolWindow::onDrawTypeSelected, scene.get(), &MainWindow::handleDrawTypeChanged);
 
     return a.exec();
 }
