@@ -25,8 +25,26 @@ void TempCanvas::drawRectange(PointData &pd)
 
 void TempCanvas::drawCircle(PointData &pd)
 {
-    QLineF line(pd.sp, pd.cp);
-    painter->drawEllipse((pd.sp + pd.cp) / 2, line.length() / 2, line.length() / 2);
+    painter->drawEllipse(QRectF(pd.sp, pd.cp));
+}
+
+void TempCanvas::drawFree(PointData &pd)
+{
+   QVector<QPointF> pointList = pd.pointList;
+    if (pointList.size() <= 0) {
+        return;
+    }
+    QPainterPath path;
+    path.moveTo(pointList[0]);
+    for (int i = 1; i < pointList.size(); i ++) {
+        QPointF &d1 = pointList[i - 1];
+        QPointF &d2 = pointList[i];
+        path.quadTo(d1, (d1 + d2) / 2);
+        painter->drawPath(path);
+        QPointF endPoint = path.currentPosition();
+        path.clear();
+        path.moveTo(endPoint);
+    }
 }
 
 void TempCanvas::drawItem(PointData &pd)
@@ -42,6 +60,9 @@ void TempCanvas::drawItem(PointData &pd)
         break;
     case Draw_Circle:
         drawCircle(pd);
+        break;
+    case Draw_Free:
+        drawFree(pd);
         break;
     default:
         qDebug() << "unsopport draw type!!!";

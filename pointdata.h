@@ -1,6 +1,7 @@
 #ifndef POINTDATA_H
 #define POINTDATA_H
 #include <QPointF>
+#include <QRectF>
 #include <QVector>
 
 enum DrawType {

@@ -33,6 +33,7 @@ private:
     void drawLine(PointData &pd);
     void drawRectange(PointData &pd);
     void drawCircle(PointData &pd);
+    void drawFree(PointData &pd);
 
 };
 

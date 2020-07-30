@@ -17,7 +17,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     coreengine.cpp \
+    customcircleitem.cpp \
+    customfreeitem.cpp \
     customlineitem.cpp \
+    customrectitem.cpp \
     graphicsbaseobject.cpp \
     graphicsshapefactory.cpp \
     main.cpp \
@@ -30,7 +33,10 @@ SOURCES += \
 
 HEADERS += \
     coreengine.h \
+    customcircleitem.h \
+    customfreeitem.h \
     customlineitem.h \
+    customrectitem.h \
     graphicsbaseobject.h \
     graphicsshapefactory.h \
     mainwindow.h \

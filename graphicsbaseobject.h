@@ -26,8 +26,6 @@ protected:
     void getRealRect(QRectF *rectf) const;
 
 private:
-//    virtual QRectF getBoundingRect() const = 0;
-
 signals:
 
 public slots:
