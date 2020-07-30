@@ -40,5 +40,8 @@
 	The default implementation handles basic item interaction, such as selection and moving. If you want to keep the base implementation when reimplementing this function, call QGraphicsItem::mouseMoveEvent() in your reimplementation.
   3. 还是要提升阅读文档的能力，减少修bug的时间，我这里是又写了一个基本的demo，才发现的问题，修复后再次阅读文档
 
-
+# 加入其他形状
+  1. 矩形
+  2. 圆形
+  3. 自由绘制，注意圆滑
 

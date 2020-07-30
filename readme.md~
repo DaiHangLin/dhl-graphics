@@ -36,4 +36,9 @@
 
 # 不能拖拽的原因
   1. 事件冒泡类型不匹配，move和release的事件都是press 
+  2. 文档里其实写的很明白
+	The default implementation handles basic item interaction, such as selection and moving. If you want to keep the base implementation when reimplementing this function, call QGraphicsItem::mouseMoveEvent() in your reimplementation.
+  3. 还是要提升阅读文档的能力，减少修bug的时间，我这里是又写了一个基本的demo，才发现的问题，修复后再次阅读文档
+
+
 
